@@ -9,6 +9,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    private var name: UILabel = {
+        let view = UILabel()
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
