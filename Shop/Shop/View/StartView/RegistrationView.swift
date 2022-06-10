@@ -7,7 +7,18 @@
 
 import UIKit
 import SnapKit
+
+protocol AddUserDelegate {
+    func saveNewUser(user: User)
+}
+
 class RegistrationView: UIViewController{
+    
+    var delegate: AddUserDelegate?
+    private var controller: Controller?
+
+
+    
     private var logoImage: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(named: "logoImage")
@@ -109,7 +120,12 @@ class RegistrationView: UIViewController{
         
         navigationItem.hidesBackButton = true
         view.backgroundColor = .white
+        
+        controller = Controller(view: self)
+
+        
         setupSubView()
+        
     }
     func setupSubView(){
         view.addSubview(logoImage)
@@ -217,6 +233,8 @@ class RegistrationView: UIViewController{
         if sender.titleLabel?.text == "SIGN IN"{
             navigationController?.pushViewController(AuthorizationView(), animated: true)
         } else if sender.titleLabel?.text == "SIGN UP"{
+            let newUser = User(name: namelTextField.text!, email: emailTextField.text!, password: passwordTextField.text!)
+            self.delegate?.saveNewUser(user: newUser)
             navigationController?.pushViewController(AuthorizationView(), animated: true)
         }
     }

@@ -10,6 +10,9 @@ import SnapKit
 
 class AuthorizationView: UIViewController{
     
+    private var controller: Controller?
+
+    
     private var logoImage: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(named: "logoImage")
@@ -183,5 +186,10 @@ class AuthorizationView: UIViewController{
         }else if sender.titleLabel?.text == "Sign UP"{
             navigationController?.pushViewController(RegistrationView(), animated: true)
         }
+    }
+}
+extension AuthorizationView: AddUserDelegate{
+    func saveNewUser(user: User) {
+        controller?.setUserToModel(user: user)
     }
 }
